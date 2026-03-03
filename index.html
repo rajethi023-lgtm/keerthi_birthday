@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keerthi-birthday 💙</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    text-align:center;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* Intro Screen */
+#intro{
+    position:absolute;
+    width:100%;
+    top:35%;
+}
+
+.logo{
+    font-size:50px;
+    color:#00c6ff;
+    text-shadow:0 0 20px #00c6ff,0 0 40px #0072ff;
+    animation:fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.5);}
+    to{opacity:1; transform:scale(1);}
+}
+
+input{
+    padding:10px;
+    border-radius:20px;
+    border:none;
+    margin-top:20px;
+    text-align:center;
+}
+
+button{
+    padding:10px 20px;
+    border-radius:20px;
+    border:none;
+    background:#00c6ff;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+/* Main Content */
+#main{
+    display:none;
+    padding:20px;
+}
+
+h1{
+    font-size:40px;
+    color:#00c6ff;
+    text-shadow:0 0 20px #00c6ff;
+}
+
+img{
+    width:220px;
+    border-radius:50%;
+    border:4px solid #00c6ff;
+    box-shadow:0 0 40px #00c6ff;
+    margin-top:20px;
+}
+
+video{
+    width:85%;
+    border-radius:20px;
+    border:3px solid #00c6ff;
+    margin-top:25px;
+}
+
+/* Lightning Flash */
+.flash{
+    animation:flash 0.3s;
+}
+@keyframes flash{
+    0%{background:white;}
+    100%{background:black;}
+}
+
+/* Screen Shake */
+.shake{
+    animation:shake 0.5s;
+}
+@keyframes shake{
+    0%{transform:translate(5px,5px);}
+    25%{transform:translate(-5px,-5px);}
+    50%{transform:translate(5px,-5px);}
+    75%{transform:translate(-5px,5px);}
+    100%{transform:translate(0,0);}
+}
+
+/* Confetti */
+.confetti{
+    position:fixed;
+    width:8px;
+    height:8px;
+    background:#00c6ff;
+    top:-10px;
+    animation:fall 3s linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <div class="logo">KEERTHI 💙</div>
+    <h3>What’s your favourite color?</h3>
+    <input type="text" id="pass" placeholder="Type here...">
+    <br>
+    <button onclick="unlock()">ENTER</button>
+</div>
+
+<div id="main">
+    <h1>Happy Birthday Keerthi @shobana 💙</h1>
+
+    <img src="keerthi.jpeg">
+
+    <p id="text"></p>
+
+    <video controls>
+        <source src="keerthi_video.mp4" type="video/mp4">
+    </video>
+
+    <audio autoplay loop>
+        <source src="neelothi.mpeg" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+function unlock(){
+    let value=document.getElementById("pass").value.toLowerCase();
+    if(value=="blue"){
+        document.body.classList.add("flash");
+        document.body.classList.add("shake");
+        setTimeout(()=>{
+            document.getElementById("intro").style.display="none";
+            document.getElementById("main").style.display="block";
+            confettiBlast();
+        },500);
+    } else{
+        alert("Wrong answer Avenger 😎");
+    }
+}
+
+let message=`If my life was empty, you came like my shadow and made me the happiest person in the world. 
+This bond… how long it will stay I don’t know. 
+But as long as it exists, I will always be the first one for you. 
+You may have many friends… but I wish to be the last one in your life. 
+Thank you for staying in my life and tolerating all my torture 😅💙`;
+
+let i=0;
+function typeEffect(){
+    if(i<message.length){
+        document.getElementById("text").innerHTML+=message.charAt(i);
+        i++;
+        setTimeout(typeEffect,40);
+    }
+}
+typeEffect();
+
+function confettiBlast(){
+    for(let i=0;i<70;i++){
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.animationDuration=(Math.random()*3+2)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+}
+</script>
+
+</body>
+</html>
